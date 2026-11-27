@@ -20,6 +20,11 @@ public final class CatalogoHandler {
     );
 
     public Map<String, Object> handleRequest(Map<String, Object> evento) {
+        if (SecretosCatalogo.esConsultaDeEstado(evento)) {
+            return SecretosCatalogo.verificarAcceso()
+                    ? respuesta(200, "{\"integracion\":\"lista\"}")
+                    : respuesta(503, "{\"integracion\":\"no_disponible\"}");
+        }
         String metodo = obtenerMetodo(evento);
         try {
             return switch (metodo) {
