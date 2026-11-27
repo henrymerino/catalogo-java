@@ -1,6 +1,6 @@
 # Catálogo de productos en Java 21
 
-En el Día 1 vas a descargar, compilar y ejecutar el catálogo en tu computadora. La demo consulta dos productos de ejemplo en memoria. Mañana usarás la misma función en AWS Lambda.
+En el Día 1 vas a descargar, compilar y ejecutar el catálogo en tu computadora. La demo consulta tres productos de ejemplo en memoria. Mañana usarás la misma función en AWS Lambda.
 
 ## 1. Descarga y extrae el ZIP
 
