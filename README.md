@@ -68,11 +68,20 @@ GET /productos/abc → HTTP 400
 | `Could not find or load main class` | Revisa que el primer comando terminó correctamente y ejecuta el segundo desde la raíz del proyecto. |
 | `UnsupportedClassVersionError` | Comprueba que `java -version` y `javac -version` muestran 21. Cierra y vuelve a abrir la terminal después de instalar el JDK 21. |
 
-## 5. Lee el código y prueba otro ID
+## 5. Lee el código y prueba las operaciones
 
 1. Abre `src/academy/aws/DemoLocal.java` en tu editor. Identifica dónde se prepara el evento para cada ID.
-2. En la misma carpeta, abre `CatalogoHandler.java`. Sigue el ID desde `pathParameters` hasta la búsqueda en `PRODUCTOS` y el JSON de salida.
+2. En la misma carpeta, abre `CatalogoHandler.java`. Revisa cómo `handleRequest` identifica el método y el ID, y cómo persiste los productos en formato JSON por línea.
 3. Ejecuta `java -cp target/classes academy.aws.DemoLocal 2` y comprueba que devuelve `HTTP 200` con la ficha del Mouse. Conserva la carpeta para la práctica de mañana.
+
+El catálogo combina los tres productos iniciales con los productos guardados en `productos.txt` en la carpeta desde donde ejecutas la aplicación. Para usar otra ubicación, configura `PRODUCTOS_FILE_PATH`. Los cuerpos de POST y PUT son objetos JSON: POST requiere `id`, `nombre` y `precio`; PUT recibe únicamente `nombre` y `precio`, y toma el ID del parámetro `id`. El ID debe tener de 1 a 10 dígitos, el nombre no puede estar vacío y el precio debe ser numérico y no negativo.
+
+| Operación | Resultado |
+|---|---|
+| `GET /?id=40` | Devuelve la ficha del producto o `404` si no existe. |
+| `GET /` | Devuelve un arreglo con los productos iniciales y los guardados en el TXT. |
+| `POST /` con `{"id":40,"nombre":"Monitor","precio":180}` | Guarda una línea JSON y devuelve `201`; un ID existente devuelve `409`. |
+| `PUT /?id=40` con `{"nombre":"Monitor HD","precio":195}` | Reemplaza el producto guardado y devuelve `200`; un ID que no está en el TXT devuelve `404`. |
 
 ## Desplegar en AWS en la práctica posterior
 
